@@ -41,8 +41,8 @@ function [T W] = lwregress(X,Y,D,h, pl)
     T       = zeros(size(D_aug,1),1);	%regression points
     W       = zeros(size(D_aug));       %regression coeffs
 	
-% 	D_aug
-% 	size(D_aug)
+	size(D)
+	size(D_aug)
 
     %Primary Loop
     for i = 1:size(D_aug,1)
