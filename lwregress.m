@@ -34,15 +34,10 @@ function [T W] = lwregress(X,Y,D,h, pl)
     c = 0.0001;
 
     % initialize
-% 	Xsize = size(X)
     X_aug	= [X ones(size(X,1),1)];	%augmented data
-% 	Xaugsize = size(X_aug)
     D_aug	= [D ones(size(D,1),1)];	%augmented test points
     T       = zeros(size(D_aug,1),1);	%regression points
     W       = zeros(size(D_aug));       %regression coeffs
-	
-	size(D)
-	size(D_aug)
 
     %Primary Loop
     for i = 1:size(D_aug,1)
