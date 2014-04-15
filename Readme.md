@@ -22,9 +22,9 @@ the video you want to analyze.
 1. In MATLAB, navigate into a folder that contains both the .avi and .wav files 
 for your video. The files should have the same name, just different extensions.
 2. Pass the name of the video file into the trackVelTT function:
-'''
->> trackVelTT(filename)
-'''
+
+        >> trackVelTT(filename)
+	
 3. Click on a spot near the velum (preferably along the top edge, between the 
 middle and the pharynx).
 4. Wait until the grayscale image disappears and reappears again; now, click on 
@@ -37,6 +37,5 @@ series, the filtered time series, and a bunch of other useful information in
 .mat files under a new folder that takes its name from the file name you passed 
 into the function. Now, closing MViewRT does not get rid of the time series. 
 When you want to investigate the video again, you can call
-'''
->> loadIntoMViewRT(filename)
-'''
+
+    >> loadIntoMViewRT(filename)
