@@ -60,6 +60,13 @@ for i = minx:maxx
 	end
 end
 
+% Right now, constrictions are at local maxima. MViewRT doesn't like this,
+% so reverse it.
+
+ts_max = max(ts_cra);
+ts_min = min(ts_cra);
+ts_cra = ts_max - ts_cra + ts_min;
+
 % NEW FILTER FUNCTION
 disp('Filtering time series...');
 interp = 1; % basically, how many subintervals you want to be considered between each frame

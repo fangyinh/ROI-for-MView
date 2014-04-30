@@ -14,9 +14,9 @@ load(strcat([filename '/ts_vel.mat']));
 load(strcat([filename '/ts_tt.mat']));
 
 data = prepareTimeSeries(ts_tt, ts_vel);
-dataForMView = FormatData(data, filename);
+dataForMView = FormatData(data, filename); % This function should be with the other MViewRT functions
 
-mviewRT(dataForMView, filename)
+mviewRT(dataForMView, 'LPROC', 'lp_findgest')
 
 end
 
