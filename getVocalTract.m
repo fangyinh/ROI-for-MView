@@ -83,7 +83,7 @@ function [ ] = getVocalTract( filename )
 	B = zeros(68,68);
 	
 % 	Holds the path from a given coordinate to the end point
-	P = zeros(68,2,68);
+	P = zeros(68,2,68*68);
 
 % 	Holds the list of coordinates that have already been visited on a given
 % 	path. Prevents cycling through the same points over and over again.
@@ -266,7 +266,7 @@ function [ ] = getVocalTract( filename )
 %	value -- TRUE or FALSE
 	function [value] = pointIsValid(x, y)
 		value = true;
-		if x < min(startX,endX) || x > max(startX,endX) || y > max(startY,endY) || y < min(startY,endY)
+		if x < min(startX,endX) || x > max(startX,endX) %|| y > max(startY,endY) || y < min(startY,endY)
 			value = false;
 		end
 	end
