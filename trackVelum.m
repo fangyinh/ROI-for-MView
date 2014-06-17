@@ -1,4 +1,4 @@
-function []=trackVelum(filename,tau)
+function [ts_vel]=trackVelum(filename,tau)
 
 if nargin < 2
 	tau = 0.6;
@@ -36,10 +36,6 @@ miny = y-regionSize;
 maxy = y+regionSize;
 
 dynamic_range = 0.000;
-ts_cra_ij = [];
-mask_ij = [];
-i = 0;
-j = 0;
 
 for i = minx:maxx
 	for j = miny:maxy

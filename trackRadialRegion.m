@@ -1,8 +1,8 @@
-function [] = trackTongueTip(filename, radius)
+function [instance] = trackRadialRegion(filename, regionClass, radius)
 %trackTongueTip 
 
-if nargin < 2
-	radius = 4;
+if nargin < 3
+	radius = 3;
 end
 
 regionSize = 1;
@@ -76,26 +76,26 @@ D	= linspace(min(X),max(X),(interp*max(X)))';
 
 maskedImage = meanImage + (20*(mask./max(max(mask))));
 
-ts_tt = TongueTipTimeSeries;
-ts_tt.framerate = framerate;
-ts_tt.vidMatrix = vidMatrix;
-ts_tt.meanImage = meanImage;
-ts_tt.radius = radius;
-ts_tt.maskedImage = maskedImage;
-ts_tt.mask = mask;
-ts_tt.x = x;
-ts_tt.y = y;
-ts_tt.ts_cra = ts_cra;
-ts_tt.ts_filt = ts_filt;
+instance = eval(regionClass);
+instance.framerate = framerate;
+instance.vidMatrix = vidMatrix;
+instance.meanImage = meanImage;
+instance.radius = radius;
+instance.maskedImage = maskedImage;
+instance.mask = mask;
+instance.x = x;
+instance.y = y;
+instance.ts_cra = ts_cra;
+instance.ts_filt = ts_filt;
 
 % The best time series has been selected
 % Save masked image picture
 h = figure;
-imagesc(ts_tt.maskedImage)
-print(h,'-dpng',strcat(dir,'/maskedImageTT'));
+imagesc(instance.maskedImage)
+print(h,'-dpng',strcat(dir,'/maskedImage'));
 close();
 
 % Save the best time series object into a .mat file
-save(strcat(dir,'/ts_tt'),'ts_tt');
+save(strcat(dir,'/',instance.nameForStorage),'instance');
 
 end

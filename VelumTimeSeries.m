@@ -11,6 +11,7 @@ classdef VelumTimeSeries < ArticulatorTimeSeries
 	methods
 		function obj = VelumTimeSeries()
 			obj.name = 'VEL';
+			obj.nameForStorage = 'ts_vel';
 		end
 	end
 	

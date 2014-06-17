@@ -14,6 +14,7 @@ classdef (Abstract) ArticulatorTimeSeries
 		ts_filt
 		x
 		y
+		nameForStorage
 	end
 	
 	methods
