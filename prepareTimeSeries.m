@@ -26,6 +26,7 @@ function data = prepareTimeSeries( varargin )
 		data.gest(k).times = times;
 
 		data.gest(k).Ismoothed = ts.ts_filt;
+% 		data.gest(k).Ismoothed = ts.ts_cra;
 		data.gest(k).stimes = times;
 	end
 

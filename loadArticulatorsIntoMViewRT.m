@@ -10,16 +10,27 @@ end
 
 disp('Opening time series in MViewRT...');
 
+% ts = load(strcat([filename '/ts_vel.mat']));
+% ts_vel = ts.ts_vel;
+% ts = load(strcat([filename '/ts_tt.mat']));
+% ts_tt = ts.instance;
+% ts = load(strcat([filename '/ts_dor.mat']));
+% ts_dor = ts.instance;
+% ts = load(strcat([filename '/ts_root.mat']));
+% ts_root = ts.instance;
+% ts = load(strcat([filename '/ts_lab.mat']));
+% ts_lab = ts.instance;
+
 ts = load(strcat([filename '/ts_vel.mat']));
-ts_vel = ts.ts_vel;
+ts_vel = ts.obj;
 ts = load(strcat([filename '/ts_tt.mat']));
-ts_tt = ts.instance;
+ts_tt = ts.obj;
 ts = load(strcat([filename '/ts_dor.mat']));
-ts_dor = ts.instance;
+ts_dor = ts.obj;
 ts = load(strcat([filename '/ts_root.mat']));
-ts_root = ts.instance;
+ts_root = ts.obj;
 ts = load(strcat([filename '/ts_lab.mat']));
-ts_lab = ts.instance;
+ts_lab = ts.obj;
 
 data = prepareTimeSeries(ts_lab, ts_tt, ts_dor, ts_root, ts_vel);
 dataForMView = FormatData(data, filename); % This function should be with the other MViewRT functions

@@ -18,6 +18,14 @@ classdef (Abstract) ArticulatorTimeSeries
 	end
 	
 	methods
+		function saveAs(obj, filename)
+			% Create directory
+			[~, dir, ~] = fileparts(filename);
+			if ~exist(dir, 'dir')
+				mkdir(dir);
+			end
+			save(strcat(dir,'/',obj.nameForStorage),'obj');
+		end
 	end
 	
 end
