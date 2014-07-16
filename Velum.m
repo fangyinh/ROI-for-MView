@@ -1,10 +1,27 @@
 classdef Velum < ShapeArticulator
-	%VelumTimeSeries Contains the methods and properties required for pixel
-	%intensity measurements of velum movement
-	%   Detailed explanation goes here
+	%	Velum Contains Articulator information about the velum
+	%   Velum is a subclass of ShapeArticulator. It takes a single point and tries to find a velum-shaped region from which to take a time series.
+	%	
+	%	Velum Methods:
+	%		Velum - Constructor method
+	%
+	%	See also VocalTract, ShapeArticulator, Articulator
 	
+	%	Reed Blaylock July 16, 2014
+
 	methods
 		function obj = Velum()
+			%	Velum	Constructor method for the Velum class.
+			%		obj = Velum()				Returns a new Velum object. Call the run() method to find time series information.
+			%
+			%	Output argument:
+			%		obj - A Velum object.
+			%
+			%	Example: Invoking the constructor
+			%		obj = Velum();
+			%
+			%	See also run, VocalTract/setArticulator
+			
 			obj.name = 'VEL';
 			obj.nameForStorage = 'ts_vel';
 			obj.displayName = 'velum';

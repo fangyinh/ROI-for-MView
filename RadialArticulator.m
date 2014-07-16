@@ -1,14 +1,41 @@
 classdef (Abstract) RadialArticulator < Articulator
-	%UNTITLED Summary of this class goes here
-	%   Detailed explanation goes here
+	%	RadialArticulator Abstract subclass of Articulator
+	%   RadialArticulator is a subclass of Articulator. It is the superclass of most concrete Articulator classes, including Lips, TongueTip, TongueBody, and TongueRoot.
+	%	As an abstract class, RadialArticulator is never instantiated itself. Instead, instantiate one of its subclasses.
+	%
+	%	RadialArticulator Properties:
+	%		radius - The number of points out from the center of a circular region to be used when finding an Articulator time series.
+	%		points - The set of origin points for the circular regions used to find the Articulator time series.
+	%
+	%	RadialArticulator Methods
+	%		run - Sets most Articulator values; finds both the unfiltered and filtered time series for the Articulator.
+	%
+	%	See also, VocalTract, Articulator, ShapeArticulator, Lips, TongueTip, TongueBody, TongueRoot
+	
+	%	Reed Blaylock July 16, 2014
 	
 	properties
-		radius
-		points
+		radius	% The length of the radius of the circular region used for defining the time series of an Articulator
+		points	% The set of points to be used as the origin of the circular Regions of Interest
 	end
 	
-	methods
+	methods	
 		function [] = run(obj, points, vidMatrix, numFrames)
+			%	run	Initializes the RadialArticulatr object
+			%		obj.run()				Establishes the circular Region of Interest and calculates its raw and filtered time series.
+			%
+			%	Input arguments:
+			%		obj - A RadialArticulator object.
+			%		points - An Nx2 matrix with the set of points that should be the centers of circular regions for analysis.
+			%		vidMatrix - A numFrames x 4624 matrix containing all the intensity values for every pixel at each frame of the rtMR video.
+			%		numFrames - The number of frames in the rtMR video.
+			%
+			%	Example: Running the RadialArticulator object
+			%		obj = Lips('myvideo.avi'); % The class 'Lips' is a non-abstract class which subclasses Articulator.
+			%		obj.run();
+			%
+			%	See also VocalTract, ShapeArticulator, Lips, TongueTip, TongueBody, TongueRoot
+			
 			numPoints = size(points,1);
 			regionTS = zeros(numFrames, numPoints);
 			artMask = zeros(68, 68);
