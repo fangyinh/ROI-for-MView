@@ -628,7 +628,7 @@ classdef VocalTract < handle
 			%
 			%	See also VocalTract, save, load, convertLabelsForGUI
 			
-			[obj] = VocalTract.load(filename);
+			obj = VocalTract.load(filename);
 			
 			data.fps = obj.framerate;
 			
@@ -637,19 +637,22 @@ classdef VocalTract < handle
 
 			articulators = {'LAB', 'TT', 'TB', 'TR', 'VEL'};
 			
+			n = 1;
 			for k = 1:numel(articulators)
 				str = articulators{k};
 				articulator = obj.(str);
 				
 				if ~articulator.isEmpty()
-					data.gest(k).name = articulator.name;
-					data.gest(k).location = [articulator.x, articulator.y];
+					data.gest(n).name = articulator.name;
+					data.gest(n).location = [articulator.x, articulator.y];
 
-					data.gest(k).frames = frames;
-					data.gest(k).times = times;
+					data.gest(n).frames = frames;
+					data.gest(n).times = times;
 
-					data.gest(k).Ismoothed = articulator.ts_filt;
-					data.gest(k).stimes = times;
+					data.gest(n).Ismoothed = articulator.ts_filt;
+					data.gest(n).stimes = times;
+					
+					n = n + 1;
 				end
 			end
 			
