@@ -213,39 +213,47 @@ function [ ] = getVocalTract_iter( filename )
 		endX = endPoint(1,1);
 		endY = endPoint(1,2);
 		
-%		Seed the end value at j = 0; have to do it because there are no
-%		previous points to pull brightness from
-		j = 0;
 		t = endX - startX;
+		j = 0;
 		B(endX, endY) = stdImage(endY, endX);
 		P(1,1,1) = endX;
 		P(1,2,1) = endY;
-		states = [];
-% % 	[x-1, y+1] downleft
-		x = endX - 1;
-		y = endY + 1;
-		if y <= startY+(t-j) && y >= startY-(t-j) %fix these
-			states = [states; x, y];
-		end
-% % 	[x-1, y] left
-		x = endX - 1;
-		y = endY;
-		if y <= startY+(t-j) && y >= startY-(t-j)
-			states = [states; x, y];
-		end
-% % 	[x-1, y-1] upleft
-		x = endX - 1;
-		y = endY - 1;
-		if y <= startY+(t-j) && y >= startY-(t-j)
-			states = [states; x, y];
-		end
+		states = endPoint;
 
-		for j = 1:t
+		while ~isempty(states)
 			newStates = [];
 			for i = 1:size(states, 1)
 				currentPoint = states(i,:);
 				currentX = currentPoint(1,1);
 				currentY = currentPoint(1,2);
+				
+		% 		Get the set of points that are reasonable continuations
+		% 		from this one
+
+		% % 	[x-1, y+1] downleft
+				x = currentX - 1;
+				y = currentY + 1;
+				if y <= startY+(t-j) && y >= startY-(t-j) %fix these
+					newStates = [newStates; x, y];
+				end
+
+		% % 	[x-1, y] left
+				x = currentX - 1;
+				y = currentY;
+				if y <= startY+(t-j) && y >= startY-(t-j)
+					newStates = [newStates; x, y];
+				end
+
+		% % 	[x-1, y-1] upleft
+				x = currentX - 1;
+				y = currentY - 1;
+				if y <= startY+(t-j) && y >= startY-(t-j)
+					newStates = [newStates; x, y];
+				end
+				
+				if isequal(currentPoint, endPoint) % Values for the initial case have already been supplied, so skip this iteration and move on to the next stage
+					continue;
+				end
 				
 %				Get the best previous_brightness possible
 				adjacentPoints = [currentX+1, currentY-1; currentX+1, currentY; currentX+1, currentY+1];
@@ -270,32 +278,9 @@ function [ ] = getVocalTract_iter( filename )
 				rowToReplace = find(P(1,1,:) == 0);
 				rowToReplace = rowToReplace(1);
 				P(:,:,rowToReplace) = trimmedPath;
-
-		% 		Get the set of points that are reasonable continuations
-		% 		from this one
-
-		% % 	[x-1, y+1] downleft
-				x = currentX - 1;
-				y = currentY + 1;
-				if y <= startY+(t-j) && y >= startY-(t-j) %fix these
-					newStates = [newStates; x, y];
-				end
-
-		% % 	[x-1, y] left
-				x = currentX - 1;
-				y = currentY;
-				if y <= startY+(t-j) && y >= startY-(t-j)
-					newStates = [newStates; x, y];
-				end
-
-		% % 	[x-1, y-1] upleft
-				x = currentX - 1;
-				y = currentY - 1;
-				if y <= startY+(t-j) && y >= startY-(t-j)
-					newStates = [newStates; x, y];
-				end
 			end
 			states = unique(newStates, 'rows');
+			j = j + 1;
 		end
 	end
 

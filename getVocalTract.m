@@ -675,7 +675,7 @@ function [ ] = getVocalTract( filename )
 		adjacentPoints = [];
 		s = 0;
 		
-% % 	[x+1, y+1]
+% % 	[x+1, y+1] downright
 		x = currentX + 1;
 		y = currentY + 1;
 % 		if x <= endX && y <= (endX-x)+endY && y >= (endX-x)-endY && ~(visitedCoordinates(x, y) > 0.0)
@@ -686,7 +686,7 @@ function [ ] = getVocalTract( filename )
 % 			points(1,:) = [x, y];
 		end
 		
-% % 	[x, y+1]
+% % 	[x, y+1] down
 		x = currentX;
 		y = currentY + 1;
 % 		if x <= endX && y <= (endX-x)+endY && y >= (endX-x)-endY && ~(visitedCoordinates(x, y) > 0.0)
@@ -696,7 +696,7 @@ function [ ] = getVocalTract( filename )
 % 			points(2,:) = [x, y];
 		end
 		
-% % 	[x+1, y]
+% % 	[x+1, y] right
 		x = currentX + 1;
 		y = currentY;
 % 		if x <= endX && y <= (endX-x)+endY && y >= (endX-x)-endY && ~(visitedCoordinates(x, y) > 0.0)
