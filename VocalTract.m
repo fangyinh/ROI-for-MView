@@ -362,7 +362,7 @@ classdef VocalTract < handle
 		
 		function [startPoint, midPoint, endPoint] = init(obj)
 			%	init	Initializes the VocalTract object.
-			%		[startPoint, midPoint, endPoint] = obj.getVidMatrix()				Returns the x/y coordinates of the three user-defined points used for finding the midline.
+			%		[startPoint, midPoint, endPoint] = obj.init()				Returns the x/y coordinates of the three user-defined points used for finding the midline.
 			%
 			%	Call this function after invoking the VocalTract constructor. Do not use this function if you have given the VocalTract object a pre-specified midline (instead, use setArticulator).
 			%
@@ -402,7 +402,7 @@ classdef VocalTract < handle
 		
 		function [] = setArticulator(obj, articulatorNames)
 			%	setArticulator	Sets the values for the specified Articulator objects in the VocalTract.
-			%		obj.getVidMatrix(articulatorNames)				Finds and stores a time series for each of the articulators in articulatorNames.
+			%		obj.setArticulator(articulatorNames)				Finds and stores a time series for each of the articulators in articulatorNames.
 			%
 			%	This function is called automatically by init(). Call this function explicitly when you have supplied the VocalTract with a pre-defined midline, or if you want to change the values of some Articulator.
 			%
@@ -421,8 +421,7 @@ classdef VocalTract < handle
 			%	See also VocalTract, init, load
 			
 			if isempty(obj.midline)
-				disp('ERROR: Before you can set any articulators, you must first call the method getVocalTract on your VocalTract object.');
-				return;
+				disp('WARNING: A midline has not been set. Each gesture will be extracted from a single circular region.');
 			end
 			if ismember('LAB', articulatorNames)
 				obj.extractArticulator(obj.LAB);
@@ -489,30 +488,41 @@ classdef VocalTract < handle
 			%
 			%	See also VocalTract, Articulator, setArticulator
 			
-			figure('name',['Select points for the ',articulator.displayName]);
-			obj.showMidline('mean');
+			figure('name',['Extract the ',articulator.displayName]);
+			
 			
 			if ~articulator.isEmpty()
-				disp(['WARNING: You are about to overwrite the data collected for the ' articulator.displayName '. If you close the picture window or quit this script now, your data will not be overwritten.']);
+				disp(['WARNING: You are about to overwrite previous data for the ' articulator.displayName '. If you close the figure window or quit this script now, your data will not be overwritten.']);
 			end
 			
 			if isa(articulator, 'Velum')
+				obj.showMeanImage();
+				
 				[x, y] = obj.getPointFromClick(['Click at the top of the ' articulator.displayName '.']);
 				articulator.run([x y], obj.vidMatrix, obj.numFrames);
 			else
-				[frontX, frontY] = obj.getPointFromClick(['Click the point on the path that is closest to the front of the ' articulator.displayName '.']);
-				tempPath = [frontX frontY; obj.midline];
-				D = squareform(pdist(tempPath));
-				[~, iFront] = min(D(1,2:end));
+				if ~isempty(obj.midline)
+					obj.showMidline('mean');
+					
+					[frontX, frontY] = obj.getPointFromClick(['Click the point on the path that is closest to the front of the ' articulator.displayName '.']);
+					tempPath = [frontX frontY; obj.midline];
+					D = squareform(pdist(tempPath));
+					[~, iFront] = min(D(1,2:end));
 
-				[backX, backY] = obj.getPointFromClick(['Click the point on the path that is closest to the back of the ' articulator.displayName '.']);
-				tempPath = [backX backY; obj.midline];
-				D = squareform(pdist(tempPath));
-				[~, iBack] = min(D(1,2:end));
-
-				articulator.run(obj.midline(iFront:iBack,:), obj.vidMatrix, obj.numFrames);
+					[backX, backY] = obj.getPointFromClick(['Click the point on the path that is closest to the back of the ' articulator.displayName '.']);
+					tempPath = [backX backY; obj.midline];
+					D = squareform(pdist(tempPath));
+					[~, iBack] = min(D(1,2:end));
+					
+					articulator.run(obj.midline(iFront:iBack,:), obj.vidMatrix, obj.numFrames);
+				else
+					obj.showMeanImage();
+					
+					[oX, oY] = obj.getPointFromClick(['Click at the ' articulator.displayName '.']);
+					articulator.run([oX, oY], obj.vidMatrix, obj.numFrames);
+				end
 			end
-			close(['Select points for the ',articulator.displayName]);
+			close(['Extract the ',articulator.displayName]);
 		end
 		
 		function [mask] = shapeMidline(obj)
