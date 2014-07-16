@@ -41,11 +41,11 @@ instructions MATLAB gives on-screen.
 
 ### Extracting the gestures using MViewRT
 
-1. Assuming you followed the steps above, call
+1. Assuming you followed the steps above, to load the extracted gestures into 
+MViewRT, call:
 
 		>> VocalTract.loadIntoMViewRT('cool_video_2.avi');
 		
-to load the extracted gestures into MViewRT.
 2. MViewRT will open, followed by a dialogue box. In place of <SCREEN>, type the
 name of your file (in this case, 'cool_video_2'). Do not use quotation marks.
 Click "OK".
