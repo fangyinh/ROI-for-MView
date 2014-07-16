@@ -17,6 +17,9 @@ vocal tract videos. You need MATLAB (preferably with the image processing
 toolbox), the MViewRT software, plus the video (.avi) and audio (.wav) files of 
 the video you want to analyse.
 
+If you want to skip reading and get straight to the code, check out the demo 
+files: [demo](demo.m) and [demo2](demo2.m)
+
 ### Getting gestural time series
 
 1. In MATLAB, navigate to a folder that contains both the .avi and .wav files 
