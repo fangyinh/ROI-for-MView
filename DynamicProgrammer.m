@@ -33,7 +33,7 @@ classdef DynamicProgrammer < handle
 			%
 			%	See also findPath, setImage, VocalTract
 			
-			obj.reset;
+			obj.reset();
 			if nargin > 0
 				obj.image = image;
 			end
@@ -85,6 +85,8 @@ classdef DynamicProgrammer < handle
 			
 			path2 = obj.filterPath();
 			
+			obj.reset();
+			
 % 			wholePath = [path1; path2];
 			
 % 			s1 = size(path1,1);
@@ -104,18 +106,14 @@ classdef DynamicProgrammer < handle
 			y1 = path1(end-m1, 2);
 			x2 = path2(m2,1);
 			y2 = path2(m2,2);
-% 			visitedCoordinates = [path1(1:end-m1,:); path2(m2+1:end,:)];
-% % 			visitedCoordinates(1:s1-m1, :) = path1(1:end-m1,:);
-% % 			visitedCoordinates(s1-m1+1:(s2+s1-m1+1), :) = path2(m2+1:end,:);
-% 			
-% 			
-% % 			for z = 1:(size(path1)-5)
-% % 				visitedCoordinates(path1(z,1),path1(z,2)) = 1.0;
-% % 			end
-% % 			for z = 6:(size(path2))
-% % 				visitedCoordinates(path2(z,1),path2(z,2)) = 1.0;
-% % 			end
+
 			obj.V([x1, y1], [x2, y2], 'downright');
+			
+			[x1, y1]
+			[x2, y2]
+			Pzero = find(obj.P(1,1,:) == 0);
+			bestPath = Pzero(1)-1;
+			unfilteredPath = obj.P(:,:,(bestPath-10):bestPath)
 
 			path3 = obj.filterPath();
 
