@@ -44,8 +44,14 @@ instructions MATLAB gives on-screen.
 
 ### Extracting the gestures using MViewRT
 
-1. Assuming you followed the steps above, to load the extracted gestures into 
-MViewRT, call:
+NOTE: MViewRT requires the MViewRT and melba packages. Because the code for 
+those packages is not mine to distribute, you'll need to ask me (or someone else
+in SPAN) directly for those files. For RoI analysis, the melba package has been 
+supplemented with an additional file called 'DelimitGestNew.m'. Even if you 
+already have the melba package, you will need this additional file.
+
+1. Assuming you followed the steps above, load the extracted gestures into 
+MViewRT, by calling:
 
 		>> VocalTract.loadIntoMViewRT('cool_video_2.avi');
 		
@@ -77,3 +83,7 @@ Arpabet symbol which best describes the gesture into the COMMENT column.
 5. Edit the 'cool_video_2.txt' file as necessary to make it usable in the PDF 
 GUI.
 
+## Contact
+
+To ask questions, report bugs, or request features, email 
+reedblaylock (at) gmail (dot) com.
