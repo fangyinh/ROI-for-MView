@@ -47,8 +47,9 @@ instructions MATLAB gives on-screen.
 NOTE: MViewRT requires the MViewRT and melba packages. Because the code for 
 those packages is not mine to distribute, you'll need to ask me (or someone else
 in SPAN) directly for those files. For RoI analysis, the melba package has been 
-supplemented with an additional file called 'DelimitGestNew.m'. Even if you 
-already have the melba package, you will need this additional file.
+supplemented with an additional file called 'DelimitGestNew.m', and a new 
+version of 'lp_findgest.m'. Even if you already have the melba package, you will
+need these additional file.
 
 1. Assuming you followed the steps above, load the extracted gestures into 
 MViewRT, by calling:
