@@ -18,7 +18,7 @@ toolbox), the MViewRT software, plus the video (.avi) and audio (.wav) files of
 the video you want to analyse.
 
 If you want to skip reading and get straight to the code, check out the demo 
-files: [demo](demo.m) and [demo2](demo2.m)
+files: [demo.m](demo.m) and [demo2.m](demo2.m)
 
 ### Getting gestural time series
 
@@ -52,7 +52,7 @@ version of 'lp_findgest.m'. Even if you already have the melba package, you will
 need these additional file.
 
 1. Assuming you followed the steps above, load the extracted gestures into 
-MViewRT, by calling:
+MViewRT by calling:
 
 		>> VocalTract.loadIntoMViewRT('cool_video_2.avi');
 		
@@ -86,5 +86,5 @@ GUI.
 
 ## Contact
 
-To ask questions, report bugs, or request features, email 
+To ask questions, report bugs, or request features, email: 
 reedblaylock (at) gmail (dot) com.
