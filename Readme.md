@@ -44,12 +44,9 @@ instructions MATLAB gives on-screen.
 
 ### Extracting the gestures using MViewRT
 
-NOTE: MViewRT requires the MViewRT and melba packages. Because the code for 
-those packages is not mine to distribute, you'll need to ask me (or someone else
-in SPAN) directly for those files. For RoI analysis, the melba package has been 
-supplemented with an additional file called 'DelimitGestNew.m', and a new 
-version of 'lp_findgest.m'. Even if you already have the melba package, you will
-need these additional file.
+WARNING: MViewRT requires the MViewRT and melba packages. If you use the melba
+package for TaDA, you will need to get a new version from me. See contact
+information below.
 
 1. Assuming you followed the steps above, load the extracted gestures into 
 MViewRT by calling:
