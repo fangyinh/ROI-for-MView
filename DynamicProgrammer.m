@@ -109,11 +109,9 @@ classdef DynamicProgrammer < handle
 
 			obj.V([x1, y1], [x2, y2], 'downright');
 			
-			[x1, y1]
-			[x2, y2]
-			Pzero = find(obj.P(1,1,:) == 0);
-			bestPath = Pzero(1)-1;
-			unfilteredPath = obj.P(:,:,(bestPath-10):bestPath)
+% 			Pzero = find(obj.P(1,1,:) == 0);
+% 			bestPath = Pzero(1)-1;
+% 			unfilteredPath = obj.P(:,:,(bestPath-10):bestPath);
 
 			path3 = obj.filterPath();
 

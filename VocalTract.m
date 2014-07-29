@@ -398,6 +398,8 @@ classdef VocalTract < handle
 			obj.midline = dp.findPath([startPoint; midPoint; endPoint]);
 			
 			obj.setArticulator({'LAB', 'TT', 'TB', 'TR', 'VEL'});
+			
+			obj.save();
 		end
 		
 		function [] = setArticulator(obj, articulatorNames)
@@ -588,6 +590,24 @@ classdef VocalTract < handle
 			% Normalize matrix
 			M = M./repmat(mean(M,2),1,size(M,2));
 		end
+		
+		function [avgSlopes] = findSlopes(obj)
+			% Returns an average of the slope of a line measured at each point in the midline
+			diffs = diff(obj.midline);
+			slopes = zeros(length(diffs),1);
+			for i = 1:length(diffs)
+				slopes(i) = diffs(i,2)/diffs(i,1);
+			end
+			
+			avgSlopes = zeros(length(obj.midline),1);
+			avgSlopes(1) = slopes(1);
+			
+			for i = 2:length(slopes)
+				avgSlopes(i) = mean([slopes(i-1), slopes(i)]);
+			end
+			
+			avgSlopes(length(obj.midline)) = slopes(length(slopes));
+		end
 	end
 	
 	methods (Static)
@@ -627,6 +647,12 @@ classdef VocalTract < handle
 			%		VocalTract.loadIntoMViewRT('myvideo.avi');
 			%
 			%	See also VocalTract, save, load, convertLabelsForGUI
+			
+			no_ext = isempty(strfind(filename, '.avi'));
+			if ~no_ext
+			% 	filename came with an extension. Get rid of it.
+				[~, filename, ~] = fileparts(filename);
+			end
 			
 			obj = VocalTract.load(filename);
 			
